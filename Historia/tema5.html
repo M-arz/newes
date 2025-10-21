@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historia - Tema 5</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header>
+    <h1>Historia - Colonia, independencia y formación de la república.</h1>
+    <nav>
+      <a href="historia.html">Volver a Historia</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Video explicativo</h2>
+    <iframe width="560" height="315" 
+    src="https://www.youtube.com/embed/xNCGGEKh14s" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+    </iframe>
+
+    <h2>Ejercicios</h2>
+    <form id="form-ejercicios">
+      <label>¿Qué fue la Colonia?</label><input type="text" class="ejercicio" data-materia="historia">
+      <label>Escribe la fecha de la Batalla de Boyacá.</label><input type="text" class="ejercicio" data-materia="historia" data-materia="20 de julio de 1810">
+      <label>¿Quién fue Antonio Nariño?</label><input type="text" class="ejercicio" data-materia="historia">
+      <label>¿Qué significa la palabra “república”?</label><input type="text" class="ejercicio" data-materia="historia">
+      <label>¿En qué año se firmó el Acta de Independencia de Colombia?</label><input type="text" class="ejercicio" data-materia="historia" data-materia="7 de agosto de 1819">
+    </form>
+
+    <div class="barra-progreso" data-materia="historia">
+      <div class="progreso"></div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Página de Estudios</p>
+  </footer>
+  <script src="../script.js"></script>
+
+  <style>
+    /* Estilos de validación */
+    .correcto {
+      border: 2px solid green;
+      background-color: #e6ffe6;
+    }
+    .incorrecto {
+      border: 2px solid red;
+      background-color: #ffe6e6;
+    }
+  </style>
+
+  <script src="../script.js"></script>
+
+  <script>
+    const ejercicios = document.querySelectorAll(".ejercicio");
+    const barra = document.querySelector(".progreso");
+
+    ejercicios.forEach(input => {
+      input.addEventListener("input", () => {
+        const respuesta = input.dataset.respuesta.trim();
+        const valor = input.value.trim();
+
+        if (valor === "") {
+          input.classList.remove("correcto", "incorrecto");
+        } else if (valor === respuesta) {
+          input.classList.add("correcto");
+          input.classList.remove("incorrecto");
+        } else {
+          input.classList.add("incorrecto");
+          input.classList.remove("correcto");
+        }
+
+        actualizarProgreso();
+      });
+    });
+
+    function actualizarProgreso() {
+      const total = ejercicios.length;
+      const correctos = document.querySelectorAll(".correcto").length;
+      const porcentaje = (correctos / total) * 100;
+      barra.style.width = porcentaje + "%";
+    }
+  </script>
+</body>
+</html>

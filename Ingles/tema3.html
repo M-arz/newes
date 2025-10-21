@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inglés - Tema 3</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header>
+    <h1>Inglés - Verbos básicos, días de la semana, hora.</h1>
+    <nav>
+      <a href="ingles.html">Volver a Inglés</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Video explicativo</h2>
+    <iframe width="560" height="315" 
+    src="https://www.youtube.com/embed/xNCGGEKh14s" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+    </iframe>
+
+    <h2>Ejercicios (Barra verde: Correcto, Barra roja: Incorrecto)</h2>
+    <form id="form-ejercicios">
+      <label>Write 3 verbs (comer,correr,ir)</label>
+      <input type="text" class="ejercicio" data-materia="ingles" data-respuesta="eat,run,go">
+      <label>What day comes after Tuesday?</label>
+      <input type="text" class="ejercicio" data-materia="ingles" data-respuesta="Wednesday">
+      <label>Translate: “I like apples”</label>
+      <input type="text" class="ejercicio" data-materia="ingles" data-respuesta="Me gustan las manzanas">
+      <label>Translate: “It's 3 PM.”</label>
+      <input type="text" class="ejercicio" data-materia="ingles" data-respuesta="Son las 3 pm">
+      <label>Write 1 verbs (hablar)</label>
+      <input type="text" class="ejercicio" data-materia="ingles" data-respuesta="speak">
+    </form>
+
+    <div class="barra-progreso" data-materia="ingles">
+      <div class="progreso"></div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Página de Estudios</p>
+  </footer>
+  <script src="../script.js"></script>
+  
+  <style>
+    /* Estilos de validación */
+    .correcto {
+      border: 2px solid green;
+      background-color: #e6ffe6;
+    }
+    .incorrecto {
+      border: 2px solid red;
+      background-color: #ffe6e6;
+    }
+  </style>
+
+  <script src="../script.js"></script>
+
+  <script>
+    const ejercicios = document.querySelectorAll(".ejercicio");
+    const barra = document.querySelector(".progreso");
+
+    ejercicios.forEach(input => {
+      input.addEventListener("input", () => {
+        const respuesta = input.dataset.respuesta.trim();
+        const valor = input.value.trim();
+
+        if (valor === "") {
+          input.classList.remove("correcto", "incorrecto");
+        } else if (valor === respuesta) {
+          input.classList.add("correcto");
+          input.classList.remove("incorrecto");
+        } else {
+          input.classList.add("incorrecto");
+          input.classList.remove("correcto");
+        }
+
+        actualizarProgreso();
+      });
+    });
+
+    function actualizarProgreso() {
+      const total = ejercicios.length;
+      const correctos = document.querySelectorAll(".correcto").length;
+      const porcentaje = (correctos / total) * 100;
+      barra.style.width = porcentaje + "%";
+    }
+  </script>
+</body>
+</html>
